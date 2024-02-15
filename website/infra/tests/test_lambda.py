@@ -1,4 +1,4 @@
-from lambda.func import lambda_handler
+from infra.lambda.func import lambda_handler
 import unittest
 from unittest.mock import patch
 
