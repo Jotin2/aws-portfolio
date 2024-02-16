@@ -25,7 +25,7 @@ jobs:
 
       - name: Run Python Unit Tests
         run: python -m unittest test_lambda
-        working-directory: infra/lambda
+        working-directory: .github/workflows
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
@@ -34,8 +34,8 @@ jobs:
 
       - name: Initialize Terraform
         run: terraform init
-        working-directory: infra
+        working-directory: website/infra
 
       - name: Validate Terraform Configuration
         run: terraform validate
-        working-directory: infra
+        working-directory: website/infra
