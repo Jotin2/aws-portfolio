@@ -1,5 +1,11 @@
-from infra.lambda.func import lambda_handler
 import unittest
+import sys
+
+# Add the directory containing the lambda_handler function to the Python path
+sys.path.append('/website/infra/lambda/')
+
+# Now you can import the lambda_handler function
+from func import lambda_handler
 from unittest.mock import patch
 
 class TestLambdaFunction(unittest.TestCase):
