@@ -24,13 +24,13 @@ jobs:
           python-version: 3.9
 
       - name: Run Python Unit Tests
-        run: python -m unittest discover -s . -p '*_test.py'
+        run: run: python -m unittest test_lambda
         working-directory: infra/lambda
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
         with:
-          terraform_version: <your_terraform_version>
+          terraform_version: 1.7.3
 
       - name: Initialize Terraform
         run: terraform init
