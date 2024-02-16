@@ -25,7 +25,7 @@ jobs:
 
       - name: Run Python Unit Tests
         run: python -m unittest test_lambda
-        working-directory: website/infra
+        working-directory: website/infra/lambda
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
