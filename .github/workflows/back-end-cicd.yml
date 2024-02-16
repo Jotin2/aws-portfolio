@@ -1,0 +1,45 @@
+name: Test Lambda Function
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+    env:
+      AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_REGION: 'us-east-1'
+      SOURCE_DIR: 'website'
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
+        working-directory: website/infra/lambda
+
+      - name: Run Python Unit Tests
+        run: python -m unittest test_lambda
+        working-directory: website/infra/lambda
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.7.3
+
+      - name: Initialize Terraform
+        run: terraform init
+        working-directory: website/infra
+
+      - name: Validate Terraform Configuration
+        run: terraform validate
+        working-directory: website/infra
