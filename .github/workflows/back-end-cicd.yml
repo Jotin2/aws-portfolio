@@ -23,10 +23,6 @@ jobs:
         with:
           python-version: 3.9
 
-      - name: Install Dependencies
-        run: pip install -r requirements.txt
-        working-directory: infra/lambda
-
       - name: Run Python Unit Tests
         run: python -m unittest discover -s . -p '*_test.py'
         working-directory: infra/lambda
