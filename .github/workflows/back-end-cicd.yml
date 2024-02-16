@@ -24,7 +24,7 @@ jobs:
           python-version: 3.9
 
       - name: Run Python Unit Tests
-        run: run: python -m unittest test_lambda
+        run: python -m unittest test_lambda
         working-directory: infra/lambda
 
       - name: Setup Terraform
