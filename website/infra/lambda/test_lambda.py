@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import MagicMock, patch
-import func 
+from func import lambda_handler
 
 class TestLambdaFunction(unittest.TestCase):
 
