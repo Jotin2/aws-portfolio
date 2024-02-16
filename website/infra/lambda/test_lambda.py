@@ -1,13 +1,6 @@
 import unittest
-import sys
-import os
-
-# Add the directory containing the lambda_handler function to the Python path
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-
-# Now you can import the lambda_handler function
-from func import lambda_handler
-from unittest.mock import patch
+from unittest.mock import MagicMock, patch
+import func 
 
 class TestLambdaFunction(unittest.TestCase):
 
