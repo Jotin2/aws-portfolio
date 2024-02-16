@@ -1,32 +1,30 @@
 import unittest
-from unittest.mock import MagicMock, patch
+from unittest.mock import patch
+import boto3
 from func import lambda_handler
 
 class TestLambdaFunction(unittest.TestCase):
 
+    def setUp(self):
+        # Initialize DynamoDB client
+        self.dynamodb = boto3.resource('dynamodb')
+
+        # Get the actual view count from DynamoDB
+        table = self.dynamodb.Table('cloudresume-test')
+        response = table.get_item(Key={'id': '1'})
+        self.initial_views = response['Item']['views']
+
     @patch('boto3.resource')
     def test_lambda_handler(self, mock_dynamodb_resource):
-        # Mock DynamoDB table
-        mock_table = mock_dynamodb_resource().Table()
-
-        # Define the initial 'views' value
-        initial_views = 0
-
-        # Mock the get_item method to return the initial 'views' value
-        mock_table.get_item.return_value = {
-            'Item': {
-                'id': '1',
-                'views': initial_views
-            }
-        }
-
         # Invoke lambda_handler
         event = {}
         context = {}
         response = lambda_handler(event, context)
 
+        # Calculate the expected view count (initial views + 1)
+        expected_views = self.initial_views + 1
+
         # Check if views incremented correctly
-        expected_views = initial_views + 1
         self.assertEqual(response, expected_views)
 
 if __name__ == '__main__':
