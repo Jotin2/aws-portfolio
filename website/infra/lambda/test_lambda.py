@@ -8,10 +8,15 @@ class TestLambdaFunction(unittest.TestCase):
     def test_lambda_handler(self, mock_dynamodb_resource):
         # Mock DynamoDB table
         mock_table = mock_dynamodb_resource().Table()
+
+        # Define the initial 'views' value
+        initial_views = 0
+
+        # Mock the get_item method to return the initial 'views' value
         mock_table.get_item.return_value = {
             'Item': {
                 'id': '1',
-                'views': 5
+                'views': initial_views
             }
         }
 
@@ -21,7 +26,8 @@ class TestLambdaFunction(unittest.TestCase):
         response = lambda_handler(event, context)
 
         # Check if views incremented correctly
-        self.assertEqual(response, 6)
+        expected_views = initial_views + 1
+        self.assertEqual(response, expected_views)
 
 if __name__ == '__main__':
     unittest.main()
