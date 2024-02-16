@@ -24,7 +24,7 @@ jobs:
     
         - name: Run unit tests
           run: |
-            python -m unittest tests/test_lambda.py
+            python -m unittest infra/tests/test_lambda.py
           env:
             AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
             AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
