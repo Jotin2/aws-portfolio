@@ -8,7 +8,7 @@ on:
 jobs:
   backend:
     name: Backend CI/CD
-    if: startsWith(github.event.head_commit.modified, 'backend/') || contains(github.event.head_commit.modified, 'backend.yml')
+    if: startsWith(github.event.head_commit.modified, 'workflow/') || contains(github.event.head_commit.modified, 'workflow/main.yml')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -42,7 +42,7 @@ jobs:
 
   frontend:
     name: Frontend CI/CD
-    if: startsWith(github.event.head_commit.modified, 'frontend/') || contains(github.event.head_commit.modified, 'frontend.yml')
+    if: startsWith(github.event.head_commit.modified, 'workflow/') || contains(github.event.head_commit.modified, 'workflow/main.yml')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
